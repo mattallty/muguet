@@ -130,6 +130,11 @@ Set it to `1` to enable the reverse-proxy on the service. You should only enable
 A comma-separated list of ports that you want to *proxify*. 
 
 
+#### org.muguet.hostname-map
+
+A comma-separated list of hostname:port to map.
+
+
 ## REST API
 
 A REST API is available on port `9876` to retrieve the proxy 
