@@ -1,0 +1,65 @@
+{
+  "name": "muguet",
+  "version": "1.0.0",
+  "description": "DNS Server & Reverse Proxy for Docker containers",
+  "main": "app.js",
+  "scripts": {
+    "test": "./node_modules/.bin/_mocha --recursive test/unit",
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report html -- -R spec --recursive test/unit",
+    "coverage-ci": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec --recursive test/unit && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "lint": "node_modules/.bin/eslint ."
+  },
+  "bin": {
+    "muguet" : "./app.js"
+  },
+  "keywords": [
+    "dns",
+    "docker",
+    "compose",
+    "containers",
+    "proxy",
+    "http proxy",
+    "reverse proxy"
+  ],
+  "author": "Matthias ETIENNE <matthias@etienne.in>",
+  "license": "MIT",
+  "dependencies": {
+    "daemon": "^1.1.0",
+    "dockerode": "^2.2.2",
+    "http-proxy": "^1.11.1",
+    "lodash": "^3.10.0",
+    "measured": "^1.0.0",
+    "promise": "^7.0.3",
+    "request": "^2.60.0",
+    "util-extend": "^1.0.1",
+    "winston": "^1.0.1"
+  },
+  "devDependencies": {
+    "blanket": "^1.1.7",
+    "coveralls": "^2.11.3",
+    "eslint": "^0.24.1",
+    "istanbul": "^0.3.17",
+    "mocha": "^2.2.5",
+    "should": "^7.0.2",
+    "should-promised": "^0.3.0",
+    "sinon": "^1.15.4"
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true,
+      "mocha": true
+    },
+    "rules": {
+      "no-underscore-dangle": 0,
+      "camelcase": 0,
+      "quotes": 0,
+      "no-multi-spaces": 0,
+      "no-process-exit": 0,
+      "new-cap": 0,
+      "eol-last": 0,
+      "semi": 0,
+      "key-spacing": 0,
+      "yoda": 0
+    }
+  }
+}
