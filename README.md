@@ -55,9 +55,9 @@ Notes:
 
 For each container, *Muguet* generates several DNS entries:
 
-  - <container_id>.docker
-  - <hostname>.docker (when running a container with -h option)
-  - <compose-service>.docker (if using Docker Compose)
+  - `container_id`.docker
+  - `hostname`.docker (when running a container with -h option)
+  - `compose-service`.docker (if using Docker Compose)
   - And possibly others based on the `org.muguet.hostname` and `org.muguet.hostname-map` labels (see below) 
 
 
