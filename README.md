@@ -6,12 +6,23 @@
 
 ## Introduction
 
-When using Docker, it's sometimes a pain to access your web containers using specific IPs/ports. 
-This reverse-proxy allows you to access these containers using generated sub-domains.
-
+When using Docker, it's sometimes a pain to access your containers using specific IPs/ports.
+Muguet provides you with a DNS Server that resolves auto-generated hostnames to your containers IPs,
+plus a reverse proxy to access all your web apps on port 80. 
 
 ![Muguet-Schema](assets/muguet-schema.png)
 
+## Prerequisites
+
+  - A running [Docker](https://www.docker.com/) environment
+  - [Node.js](https://nodejs.org/) or [io.js](https://iojs.org)
+  
+
+## Install
+
+```bash
+npm install -g muguet
+```
 
 If you are using Docker Compose, let's say your `docker-compose.yml` looks like the following:
 
