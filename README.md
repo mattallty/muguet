@@ -20,12 +20,12 @@ plus a reverse proxy to access all your web apps on port 80.
 
 ## Install
 
- * Install Muguet
+ - **Install Muguet**
 ```bash
 npm install -g muguet
 ```
 
- * Setup a new resolver
+ - **Setup a new resolver**
  
 Create a file `/etc/resolver/docker` with teh following content: 
 
