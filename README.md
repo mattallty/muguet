@@ -51,6 +51,15 @@ Notes:
     from the sudoer to the executed command run as *root*.
 
 
+## Generated hostnames
+
+For each container, *Muguet* generates several DNS entries:
+
+  - <container_id>.docker
+  - <hostname>.docker (when running a container with -h option)
+  - <compose-service>.docker (if using Docker Compose)
+  - And possibly others based on the `org.muguet.hostname` and `org.muguet.hostname-map` labels (see below) 
+
 
 If you are using Docker Compose, let's say your `docker-compose.yml` looks like the following:
 
@@ -72,23 +81,6 @@ Using an HTTP reverse proxy will allow you to access these containers using the 
 - http://site2.docker
 
 *Note that domain and sub-domain are customizable.*
-
-## Domain name resolution
-
-There is no magic here, so you will have to make your system resolve  `*.docker` (or whatever domain you choose)
-to the Proxy container IP address. 
-
-So you have 2 choices:
-
-#### 1. Updating your local `/etc/hosts` file
-
-In this case case, this repository provide you with a daemon you can use to automatically update your `/etc/hosts` file
-whenever a container is launched or stopped. See [`bin/etc-hosts-updater.js`](bin/etc-hosts-updater.js) and associated
-[documentation](README-etc-hosts.md).
-
-#### 2. Using a DNS service 
-
-Make use of a DNS service that will resolve `*.docker` (or whatever domain you choose) to the Proxy container IP address.
 
 
 ---
@@ -164,7 +156,7 @@ site1:
     - "80"
   labels:
     - "org.dc.http-proxy.enabled=1"
-    - "org.dc.http-proxy.sub-domain=foo" # Will serve this container on http://foo.docker
+    - "org.muguet.sub-domain=foo" # Will serve this container on http://foo.docker
 ```
 
 #### org.dc.http-proxy.only-ports
