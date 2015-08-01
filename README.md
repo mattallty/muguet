@@ -50,6 +50,14 @@ Notes:
   - `sudo -E bash -c 'muguet [options]'` is recommended as it allows you to pass environment variables, such as *DOCKET_HOST*,
     from the sudoer to the executed command run as *root*.
 
+Available options:
+
+```
+  - -h | --help               Display help
+  - --domain[=docker]         Set your domain. You will have to set the /etc/resolver/{domain} accordingly.
+  - --api-port[=9876]         Set the Rest API port
+  - --dns-port[=9999]         Set the DNS server port
+```
 
 ## Generated hostnames
 
@@ -73,7 +81,7 @@ site1:
     # We enable the reverse-proxy so the app will be available on port 80 rather than 8081
     - "org.muguet.reverse-proxy.enabled=1" 
     
-# site2 will be accessible on http://site2.docker as well as on http://back-office.docker 
+# site2 will be accessible on http://site2.docker and on http://back-office.docker 
 site2:
   build: ./build/docker/site2
   hostname: back-office
@@ -85,10 +93,9 @@ site2:
       
 # More complex      
 # despite not recommended, this container expose several services (mysql, apache, node.js)
-# So we have to setup a hostname-map so each service will be given a distinct hostname:
-#      
+# So we have to setup a hostname-map so each service will be given a distinct hostname
 bigcontainer: 
-  build: ./build/docker/my-container
+  image: big/big-container
   ports:
     - "3306"
     - "80"
@@ -96,10 +103,8 @@ bigcontainer:
   labels:
     # Enable reverse-proxy
     - "org.muguet.reverse-proxy.enabled=1"
-    
     # Reverse-proxy only web apps, but NOT MySQL
     - "org.muguet.reverse-proxy.only-ports=80,8990"
-    
     # Will bind:
     #   apache.bigcontainer.docker
     #   nodejs.bigcontainer.docker
@@ -108,216 +113,21 @@ bigcontainer:
     
 ```
     
-In this example, these containers will be accessible on `site1.docker` and `site2.docker`, but also on `back-office.docker`.
-
-
----
-
-
-## How it works
-    
-The reverse-proxy is itself a container that you will have to put in your `docker-compose.yml`.
-
-So you config would look like this:
-
-```yml
-site1:
-  build: ./build/docker/site1
-  ports:
-    - "80"
-  labels:
-    - "org.dc.http-proxy.enabled=1"  
-    
-site2:
-  build: ./build/docker/site2
-  ports:
-    - "80"    
-  labels:
-    - "org.dc.http-proxy.enabled=1"
-      
-proxy:
-  image: mattallty/docker-http-reverse-proxy
-  ports:
-    - "80:80"     
-```
-
-**Important**: The proxy must specifically **bind the port 80 on the host**, and must be **the only one** to do so!
-
-### Not using Docker Compose ?
-
-You can also use this proxy without using *Docker Compose*.
-In this case, the sub-domain name will be taken either from you container *label* named `org.dc.http-proxy.sub-domain`,
-if it is present, or from the container id itself (but will be much less memorable).
-Obviously, you will also have to set the *label* `org.dc.http-proxy.enabled=1` on your containers.
-
 ---
 
 ## Labels
 
 Docker `labels` are used as configuration settings. Here is the list of recognized labels:
 
-#### org.dc.http-proxy.enabled
+#### org.muguet.reverse-proxy.enabled
 
-Set it to 1 to enable proxying to the service.
-
-Example:
-
-```yml
-site1:
-  build: ./build/docker/site1
-  ports:
-    - "80"
-  labels:
-    - "org.dc.http-proxy.enabled=1"  # Enable proxying for this container
-```
-
-#### org.dc.http-proxy.sub-domain
-
-Used to specify a sub-domain. By default, the compose service name is used, ie `site1` or `site2` in the example.
-
-Example:
-
-```yml
-site1:
-  build: ./build/docker/site1
-  ports:
-    - "80"
-  labels:
-    - "org.dc.http-proxy.enabled=1"
-    - "org.muguet.sub-domain=foo" # Will serve this container on http://foo.docker
-```
-
-#### org.dc.http-proxy.only-ports
-
-A comma-separated list of ports that you want to proxify. Useful if one of your containers expose multiple ports, 
-but some of them don't need to be proxied.
-
-Example:
-
-```yml
-site1:
-  build: ./build/docker/site1
-  ports:
-    - "80"
-    - "8888"
-    - "3306"
-  labels:
-    - "org.dc.http-proxy.enabled=1"
-    - "org.dc.http-proxy.only-ports=80,8888"  # Will only proxify ports 80 and 8888
-```
+Set it to `1` to enable the reverse-proxy on the service. You should only enable reverse-proxy for web apps.
 
 
-#### org.dc.http-proxy.web-port 
+#### org.muguet.reverse-proxy.only-ports
 
-The port to proxify on port 80. 
-Useful if one of your containers expose multiple ports, but you want that a specific one maps to port 80.
+A comma-separated list of ports that you want to *proxify*. 
 
-Example:
-
-```yml
-site1:
-  build: ./build/docker/site1
-  ports:
-    - "9999"
-    - "8888"
-  labels:
-    - "org.dc.http-proxy.enabled=1"
-    # Will only proxify port 8888 on 80, and port 9999 to another one.
-    - "org.dc.http-proxy.web-port=8888"
-```
-
-## Examples
-
-### Custom sub-domain
-
-This will use use `foo` as sub-domain instead if `site1`, so you service will be accessible on `http://foo.docker`.
-
-```yml
-site1:
-  build: ./build/docker/site1
-  ports:
-    - "80"
-  labels:
-    - "org.dc.http-proxy.enabled=1"  
-    - "org.dc.http-proxy.subdomain=foo"
-```
-
-### Multiple ports
-
-**Warning**: This example is not an ideal example as it is contrary to the micro-service dogma.
-You would better slice your services into smaller pieces.
-
-Let's say one of your containers listen on several ports in order to 
-run apache on port 80, a node.js app that listen on port 8888, and mysql on port 3306.
-
-So you only want to proxify apache and nodejs. 
-
-```yml
-## WORKS BUT NOT A IDEAL
-app:
-  build: ./build
-  ports:
-    - "80"
-    - "8888:8888"
-    - "3306"
-  labels:
-    - "org.dc.http-proxy.enabled=1"  # Enable proxy on this container
-    - "org.dc.http-proxy.only-ports=80,8888" # Only proxy these ports
-    
-proxy:
-  image: mattallty/docker-http-reverse-proxy
-  ports:
-    - "80:80"
-```
-
-With this config, apache will be accessible via `http://app.docker` and nodejs via `http://app.docker:8888`.
-Notice that Apache has been given the port 80 on the proxy by priority (80 is privileged).
-
-This solution is not good as you have to statically fix the port binding of 8888. 
-
-As a **better solution**, you can write:
-    
-```yml
-## MUCH BETTER
-app:
-  build: ./build
-  ports:
-    - "80"
-    - "8888:8888"
-    - "3306"
-  labels:
-    # Enable proxy on this container
-    - "org.dc.http-proxy.enabled=1"
-    # Only proxy these ports
-    - "org.dc.http-proxy.only-ports=80,8888"
-    # Will proxify the port 80 on http://apache.docker
-    - "org.dc.http-proxy.port-80-subdomain=apache"
-    # Will proxify port 8888 on http://nodejs.docker
-    - "org.dc.http-proxy.port-8888-subdomain=nodejs"
-    
-proxy:
-  image: mattallty/docker-http-reverse-proxy
-  ports:
-    - "80:80"
-```    
-
-## Custom domain
-
-By default, the proxy uses `dock.dev` as domain. 
-You can change it by passing the env var `HTTP_PROXY_DOMAIN` to the proxy container:
-
-```yml
-# [...]
-    
-proxy:
-  image: mattallty/docker-http-reverse-proxy
-  ports:
-    - "80:80"
-  environment:
-    - "HTTP_PROXY_DOMAIN=mydomain.local"
-    
-# [...]    
-```    
 
 ## REST API
 
