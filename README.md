@@ -4,6 +4,8 @@
 
 [![Coverage Status](https://coveralls.io/repos/mattallty/docker-http-reverse-proxy/badge.svg?branch=master&service=github)](https://coveralls.io/github/mattallty/docker-http-reverse-proxy?branch=master)
 
+    **Muguet is a DNS Server & Reverse proxy for Docker environments**
+
 ## Introduction
 
 When using Docker, it's sometimes a pain to access your containers using specific IPs/ports.
