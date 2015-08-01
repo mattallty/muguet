@@ -27,11 +27,11 @@ npm install -g muguet
 
  - **Setup a new resolver**
  
-Create a file `/etc/resolver/docker` with teh following content: 
+Create a file `/etc/resolver/docker` with the following content: 
 
 ```
 nameserver 127.0.0.1
-port: 9999
+port 9999
 ```
  
 
