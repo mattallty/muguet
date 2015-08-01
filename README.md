@@ -28,9 +28,19 @@ npm install -g muguet
 
 ```bash
 sudo muguet [options]
+
+# or
+sudo -E bash -c 'muguet [options]'
+
 ```
 
-*Muguet needs to be run as root to be able to bind port 80.*
+Notes:
+  - Muguet needs to be run as root to be able to bind port 80
+  - `sudo -E bash -c 'muguet [options]'` is recommended as it allows you to pass environment variables, such as DOCKET_HOST,
+    from your common user environment to the root user one.
+
+
+
 
 If you are using Docker Compose, let's say your `docker-compose.yml` looks like the following:
 
