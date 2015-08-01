@@ -122,7 +122,7 @@ Docker `labels` are used as configuration settings. Here is the list of recogniz
 
 #### org.muguet.reverse-proxy.enabled
 
-Set it to `1` to enable the reverse-proxy on the service. You should only enable reverse-proxy for web apps.
+Set it to `1` to enable the reverse-proxy (only enable reverse-proxy for web apps).
 
 
 #### org.muguet.reverse-proxy.only-ports
