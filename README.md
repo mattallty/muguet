@@ -10,7 +10,9 @@ When using Docker, it's sometimes a pain to access your containers using specifi
 Muguet provides you with a DNS Server that resolves auto-generated hostnames to your containers IPs,
 plus a reverse proxy to access all your web apps on port 80. 
 
+<p align="center">
 ![Muguet-Schema](assets/muguet-schema.png)
+</p>
 
 ## Prerequisites
 
