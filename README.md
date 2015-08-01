@@ -142,20 +142,34 @@ A comma-separated list of `subdomain:port` to map.
 
 ## REST API
 
-A REST API is available on port `9876` to retrieve the proxy 
-status and configuration. You can customize the port by passing 
-the environment variable var `HTTP_PROXY_API_PORT` to the proxy 
-container:
+A REST API is available on port `9876` (customizable with `--api-port`) 
+to retrieve the reverse-proxy routes as well as DNS entries.
 
-```yml
-# [...]
+### Routes
     
-proxy:
-  image: mattallty/docker-http-reverse-proxy
-  ports:
-    - "80:80"
-  environment:
-    - "HTTP_PROXY_API_PORT=7777"
-    
-# [...]    
-```    
+#### GET /proxy-routes
+
+Sample response:
+
+```json
+{
+
+
+
+}
+
+```
+
+
+#### GET /dns-entries
+
+Sample response:
+
+```json
+{
+
+
+
+}
+
+```
