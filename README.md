@@ -58,29 +58,57 @@ For each container, *Muguet* generates several DNS entries:
   - `container_id`.docker
   - `hostname`.docker (when running a container with -h option)
   - `compose-service`.docker (if using Docker Compose)
-  - And possibly others based on the `org.muguet.hostname` and `org.muguet.hostname-map` labels (see below) 
+  - And possibly others based on the `org.muguet.hostname-map` label (see below) 
 
 
-If you are using Docker Compose, let's say your `docker-compose.yml` looks like the following:
+### Examples
 
 ```yml
+# site1 will be accessible on http://site1.docker 
 site1:
   build: ./build/docker/site1
   ports:
-    - "80"
+    - "8081"
+  labels:
+    # We enable the reverse-proxy so the app will be available on port 80 rather than 8081
+    - "org.muguet.reverse-proxy.enabled=1" 
     
+# site2 will be accessible on http://site2.docker as well as on http://back-office.docker 
 site2:
   build: ./build/docker/site2
+  hostname: back-office
   ports:
-    - "80"    
+    - "8082"
+  labels:
+    # We enable the reverse-proxy so the app will be available on port 80 rather than 8082
+    - "org.muguet.reverse-proxy.enabled=1"
+      
+# More complex      
+# despite not recommended, this container expose several services (mysql, apache, node.js)
+# So we have to setup a hostname-map so each service will be given a distinct hostname:
+#      
+bigcontainer: 
+  build: ./build/docker/my-container
+  ports:
+    - "3306"
+    - "80"
+    - "8990"
+  labels:
+    # Enable reverse-proxy
+    - "org.muguet.reverse-proxy.enabled=1"
+    
+    # Reverse-proxy only web apps, but NOT MySQL
+    - "org.muguet.reverse-proxy.only-ports=80,8990"
+    
+    # Will bind:
+    #   apache.bigcontainer.docker
+    #   nodejs.bigcontainer.docker
+    #   mysql.bigcontainer.docker
+    - "org.muguet.hostname-map=apache:80,nodejs:8990,mysql:3306"
+    
 ```
     
-Using an HTTP reverse proxy will allow you to access these containers using the following URLs:
-
-- http://site1.docker
-- http://site2.docker
-
-*Note that domain and sub-domain are customizable.*
+In this example, these containers will be accessible on `site1.docker` and `site2.docker`, but also on `back-office.docker`.
 
 
 ---
