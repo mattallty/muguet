@@ -35,10 +35,9 @@ sudo -E bash -c 'muguet [options]'
 ```
 
 Notes:
-  - Muguet needs to be run as root to be able to bind port 80
-  - `sudo -E bash -c 'muguet [options]'` is recommended as it allows you to pass environment variables, such as DOCKET_HOST,
-    from your common user environment to the root user one.
-
+  - Muguet must be run as *root* to be able to bind port 80
+  - `sudo -E bash -c 'muguet [options]'` is recommended as it allows you to pass environment variables, such as *DOCKET_HOST*,
+    from your own user environment to the *root* user one.
 
 
 
