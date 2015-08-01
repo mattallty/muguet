@@ -24,6 +24,14 @@ plus a reverse proxy to access all your web apps on port 80.
 npm install -g muguet
 ```
 
+## Usage
+
+```bash
+sudo muguet [options]
+```
+
+*Muguet needs to be run as root to be able to bind port 80.*
+
 If you are using Docker Compose, let's say your `docker-compose.yml` looks like the following:
 
 ```yml
