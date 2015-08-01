@@ -118,7 +118,7 @@ bigcontainer:
 
 ## Labels
 
-Docker `labels` are used as configuration settings. Here is the list of recognized labels:
+Docker `labels` are used as configuration settings.
 
 #### org.muguet.reverse-proxy.enabled
 
