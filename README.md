@@ -94,7 +94,7 @@ site2:
       
 # More complex      
 # despite not recommended, this container expose several services (mysql, apache, node.js)
-# So we have to setup a hostname-map so each service will be given a distinct hostname
+# So we have to setup a subdomain-map so each service will be given a distinct hostname
 bigcontainer: 
   image: big/big-container
   ports:
@@ -110,7 +110,7 @@ bigcontainer:
     #   apache.bigcontainer.docker
     #   nodejs.bigcontainer.docker
     #   mysql.bigcontainer.docker
-    - "org.muguet.hostname-map=apache:80,nodejs:8990,mysql:3306"
+    - "org.muguet.subdomain-map=apache:80,nodejs:8990,mysql:3306"
     
 ```
     
@@ -130,9 +130,9 @@ Set it to `1` to enable the reverse-proxy (only enable reverse-proxy for web app
 A comma-separated list of ports that you want to *proxify*. 
 
 
-#### org.muguet.hostname-map
+#### org.muguet.subdomain-map
 
-A comma-separated list of hostname:port to map.
+A comma-separated list of `subdomain:port` to map.
 
 
 ## REST API
