@@ -12,7 +12,6 @@ plus a reverse proxy to access all your web apps on port 80.
 
 <p align="center">
   <img src="https://github.com/mattallty/muguet/blob/master/assets/muguet-schema.png">
-![Muguet-Schema](assets/muguet-schema.png)
 </p>
 
 ## Prerequisites
