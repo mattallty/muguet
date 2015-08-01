@@ -9,6 +9,10 @@
 When using Docker, it's sometimes a pain to access your web containers using specific IPs/ports. 
 This reverse-proxy allows you to access these containers using generated sub-domains.
 
+
+![Muguet-Schema](assets/muguet-schema.png)
+
+
 If you are using Docker Compose, let's say your `docker-compose.yml` looks like the following:
 
 ```yml
