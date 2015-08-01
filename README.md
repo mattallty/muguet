@@ -53,10 +53,10 @@ Notes:
 Available options:
 
 ```
-  - -h | --help               Display help
-  - --domain[=docker]         Set your domain. You will have to set the /etc/resolver/{domain} accordingly.
-  - --api-port[=9876]         Set the Rest API port
-  - --dns-port[=9999]         Set the DNS server port
+  -h | --help               Display help
+  --domain[=docker]         Set your domain. You will have to set the /etc/resolver/{domain} accordingly.
+  --api-port[=9876]         Set the Rest API port
+  --dns-port[=9999]         Set the DNS server port
 ```
 
 ## Generated hostnames
