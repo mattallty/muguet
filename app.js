@@ -33,7 +33,7 @@ var App = function (ProxyDriver, domain, api_port, proxy_ip, dns_ip, dns_port) {
   this.dnsServer.listen(dns_port, dns_ip)
 
   // proxy
-  this.proxy = new HTTPProxy(this.proxyDriver)
+  this.proxy = new HTTPProxy(this.proxyDriver, this.dnsServer)
 }
 
 /**
