@@ -45,15 +45,14 @@ port 9999
 ```bash
 sudo muguet [options]
 
-# or
+# or (recommended)
 sudo -E bash -c 'muguet [options]'
 
 ```
 
 Notes:
   - *Muguet* must be run as *root* to be able to bind port 80
-  - `sudo -E bash -c 'muguet [options]'` is recommended as it allows you to pass environment variables, such as *DOCKET_HOST*,
-    from the sudoer to the executed command run as *root*.
+  - `sudo -E bash -c 'muguet [options]'` is recommended as it makes all needed environment variables available to the *muguet* command.
 
 Available options:
 
