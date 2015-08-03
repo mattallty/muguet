@@ -72,7 +72,7 @@ For each container, *Muguet* generates several DNS entries:
   - `container_id`.docker
   - `hostname`.docker (when running a container with -h option)
   - `compose-service`.docker (if using Docker Compose)
-  - And possibly others based on the `org.muguet.hostname-map` label (see below) 
+  - And possibly others based on the `org.muguet.reverse-proxy.subdomain-map` label (see below) 
 
 
 ### Examples
@@ -115,7 +115,7 @@ bigcontainer:
     #   apache.bigcontainer.docker
     #   nodejs.bigcontainer.docker
     #   mysql.bigcontainer.docker
-    - "org.muguet.subdomain-map=apache:80,nodejs:8990,mysql:3306"
+    - "org.muguet.reverse-proxy.subdomain-map=apache:80,nodejs:8990,mysql:3306"
     
 ```
     
@@ -135,7 +135,7 @@ Set it to `1` to enable the reverse-proxy (only enable reverse-proxy for web app
 A comma-separated list of ports that you want to *proxify*. 
 
 
-#### org.muguet.subdomain-map
+#### org.muguet.reverse-proxy.subdomain-map
 
 A comma-separated list of `subdomain:port` to map.
 

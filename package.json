@@ -2,15 +2,16 @@
   "name": "muguet",
   "version": "1.0.0",
   "description": "DNS Server & Reverse Proxy for Docker containers",
-  "main": "app.js",
+  "main": "bin/cli.js",
   "scripts": {
+    "start": "node ./bin/cli.js",
     "test": "./node_modules/.bin/_mocha --recursive test/unit",
     "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report html -- -R spec --recursive test/unit",
     "coverage-ci": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec --recursive test/unit && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "lint": "node_modules/.bin/eslint ."
   },
   "bin": {
-    "muguet": "./app.js"
+    "muguet": "./bin/cli.js"
   },
   "keywords": [
     "dns",
@@ -25,11 +26,14 @@
   "license": "MIT",
   "dependencies": {
     "daemon": "^1.1.0",
+    "defaults": "^1.0.2",
     "dockerode": "^2.2.2",
     "fs-extra": "^0.22.1",
     "http-proxy": "^1.11.1",
     "lodash": "^3.10.0",
     "measured": "^1.0.0",
+    "minimist": "^1.1.2",
+    "node-named": "0.0.1",
     "promise": "^7.0.3",
     "request": "^2.60.0",
     "util-extend": "^1.0.1",
