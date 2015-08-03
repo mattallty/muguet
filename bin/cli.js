@@ -42,6 +42,7 @@ Cli.prototype.run = function () {
     HttpProxyDriver,
     this.options['domain'],
     this.options['api-port'],
+    this.options['proxy-ip'],
     this.options['dns-ip'],
     this.options['dns-port']
   )
