@@ -25,8 +25,6 @@ var App = function (ProxyDriver, domain, api_port, proxy_ip, dns_ip, dns_port) {
   this.domain = domain
   this.apiPort = api_port
   this.proxyIp = proxy_ip
-  this.dnsIP = dns_ip
-  this.dnsPort = dns_port
 
   // DNS stuff
   this.dnsServer = new DNSServer(this, domain);
@@ -73,7 +71,7 @@ App.prototype._onContainerSetup = function (containers) {
  * @private
  */
 App.prototype._onContainerChange = function (containers) {
-  console.log("Containers have changed: %d running", containers.length)
+  Logger.info("Containers have changed: %d running", containers.length)
   this.containers = containers
   this.dnsServer.setEntries(this.getDnsEntries())
   this.proxy.updateRoutes(this.getProxyRoutes())
@@ -103,6 +101,7 @@ App.prototype._onError = function (err) {
 App.prototype.getProxyRoutes = function () {
 
   var flags = DockerContainer.IS_RUNNING | DockerContainer.HAS_PROXY_ENABLED
+
   var routes = ContainersHelper.filterContainers(this.containers, flags).map(function (cnt) {
     return cnt.getProxyRoutes(this.domain)
   }.bind(this))
@@ -130,11 +129,9 @@ App.prototype.getDnsEntries = function () {
       return prev.concat(next)
     })
   }
+
   return entries
 }
-
-
-
 
 if (require.main === module) {
   var app = new App(HttpProxyDriver)
