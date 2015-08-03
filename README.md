@@ -30,15 +30,14 @@ plus a reverse proxy to access all your web apps on port 80.
 npm install -g muguet
 ```
 
- - **Setup a new resolver**
+ - **Setup routing**
  
-Create a file `/etc/resolver/docker` with the following content: 
+If you are using [boot2docker](http://boot2docker.io/) you must add a routing rule 
+to redirect the packets to the *boot2docker* VM.
 
 ```
-nameserver 127.0.0.1
-port 9999
+$ sudo route -n add 172.17.0.0/16 `boot2docker ip`
 ```
- 
 
 ## Usage
 
