@@ -16,7 +16,9 @@ var VERSION = require('../package.json').version
 
 var parseArgs = require('minimist')
   , defaults = require('defaults')
+  , HTTPDriver = require('http')
   , HttpProxyDriver = require('http-proxy')
+  , DNSDriver = require('node-named')
   , Logger = require('../lib/logger')
   , App = require('../app')
 
@@ -44,6 +46,8 @@ Cli.prototype.run = function () {
 
   var app = new App(
     HttpProxyDriver,
+    HTTPDriver,
+    DNSDriver,
     this.options.domain,
     this.options['api-port'],
     this.options['proxy-ip'],

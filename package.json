@@ -5,9 +5,9 @@
   "main": "bin/cli.js",
   "scripts": {
     "start": "node ./bin/cli.js",
-    "test": "./node_modules/.bin/_mocha --recursive test/unit",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report html -- -R spec --recursive test/unit",
-    "coverage-ci": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec --recursive test/unit && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "test": "TEST_MODE=1 ./node_modules/.bin/_mocha --recursive test/unit",
+    "coverage": "TEST_MODE=1 ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report html -- -R spec --recursive test/unit",
+    "coverage-ci": "TEST_MODE=1 ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec --recursive test/unit && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "lint": "node_modules/.bin/eslint ."
   },
   "repository": {
@@ -29,6 +29,7 @@
   "author": "Matthias ETIENNE <matthias@etienne.in>",
   "license": "MIT",
   "dependencies": {
+    "colors": "^1.1.2",
     "defaults": "^1.0.2",
     "dockerode": "^2.2.2",
     "fs-extra": "^0.22.1",

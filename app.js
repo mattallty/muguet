@@ -5,7 +5,7 @@ var DockerWatcher = require('./lib/docker-watcher')
   , ContainersHelper = require('./lib/containers-helper')
   , dockerode = require('dockerode')
   , url = require('url')
-  , HttpProxyDriver = require('http-proxy')
+  , colors = require('colors')
   , HTTPProxy = require('./lib/http-proxy')
   , Logger = require('./lib/logger')
   , DNSServer = require('./lib/dns-server').DNSServer
@@ -18,10 +18,12 @@ var DockerWatcher = require('./lib/docker-watcher')
  *
  * @constructor
  */
-var App = function (ProxyDriver, domain, api_port, proxy_ip, dns_ip, dns_port) {
+var App = function (ProxyDriver, HTTPDriver, DNSDriver, domain, api_port, proxy_ip, dns_ip, dns_port) {
 
   this.dockerInfos = url.parse(process.env.DOCKER_HOST)
   this.proxyDriver = ProxyDriver
+  this.httpDriver = HTTPDriver
+  this.dnsDriver = DNSDriver
   this.domain = domain
   this.apiPort = api_port
   this.proxyIp = proxy_ip
@@ -29,21 +31,25 @@ var App = function (ProxyDriver, domain, api_port, proxy_ip, dns_ip, dns_port) {
   this.dnsPort = dns_port
 
   // DNS stuff
-  this.dnsServer = new DNSServer(this, domain);
+  this.dnsServer = new DNSServer(this, this.dnsDriver, domain);
 
   // proxy
-  this.proxy = new HTTPProxy(this.proxyDriver, this.dnsServer)
+  this.proxy = new HTTPProxy(this.proxyDriver, this.httpDriver, this.dnsServer)
 }
 
+/**
+ * Return docker infos
+ * @returns {Object}
+ */
 App.prototype.getDockerInfos = function () {
-  return this.dockerInfos;
+  return this.dockerInfos
 }
 
 /**
  * Run the app
  */
 App.prototype.run = function () {
-  Logger.info("Starting Muguet App")
+  Logger.info("Starting Muguet App".green)
   this.dnsServer.listen(this.dnsPort, this.dnsIp)
   var watcher = new DockerWatcher(this, dockerode, this.dockerInfos).run()
   watcher
@@ -52,6 +58,10 @@ App.prototype.run = function () {
     .on('error', this._onError.bind(this))
 }
 
+/**
+ * Gte proxy IP address
+ * @returns {String}
+ */
 App.prototype.getProxyIp = function () {
   return this.proxyIp
 }
@@ -63,7 +73,7 @@ App.prototype.getProxyIp = function () {
  * @private
  */
 App.prototype._onContainerSetup = function (containers) {
-  Logger.info('Containers list received from Docker-watcher: %d containers found', containers.length)
+  Logger.info('Containers list received from Docker-watcher: %s containers found', String(containers.length).yellow)
   this.containers = containers
   this.dnsServer.setEntries(this.getDnsEntries())
   this.proxy.setRoutes(this.getProxyRoutes())
@@ -77,7 +87,7 @@ App.prototype._onContainerSetup = function (containers) {
  * @private
  */
 App.prototype._onContainerChange = function (containers) {
-  Logger.info("Containers have changed: %d running", containers.length)
+  Logger.info("Containers have changed: %s running", String(containers.length).yellow)
   this.containers = containers
   this.dnsServer.setEntries(this.getDnsEntries())
   this.proxy.updateRoutes(this.getProxyRoutes())
@@ -137,11 +147,6 @@ App.prototype.getDnsEntries = function () {
   }
 
   return entries
-}
-
-if (require.main === module) {
-  var app = new App(HttpProxyDriver)
-  app.run()
 }
 
 module.exports = App

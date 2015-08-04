@@ -3,6 +3,8 @@
 var should = require('should')
   , App = require('../../../app')
   , HttpProxyDriver = require('http-proxy')
+  , HTTPDriver = require('http')
+  , DNSDriver = require('node-named')
   , DockerContainer = require('../../../lib/docker-container')
   , ContainersFixtures = require('../../fixtures/containers')
   ;
@@ -17,7 +19,7 @@ describe('docker-container', function () {
 
   before(function () {
     process.env.DOCKER_HOST = 'tcp://192.168.59.103:2376'
-    app = new App(HttpProxyDriver, 'docker', 9876, '127.0.0.1', '127.0.0.1', 9999);
+    app = new App(HttpProxyDriver, DNSDriver, 'docker', 9876, '127.0.0.1', '127.0.0.1', 9999);
   })
 
   describe("new DockerContainer()", function () {
