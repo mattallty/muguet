@@ -2,6 +2,8 @@
 
 "use strict";
 
+var VERSION = require('../package.json').version
+
 /*
 
  -h | --help            Display help
@@ -55,7 +57,7 @@ Cli.prototype.run = function () {
 Cli.prototype.help = function () {
 
   var helpStr = [
-    ' Muguet 1.0.4',
+    ' Muguet ' + VERSION,
     '',
     '   -h | --help            Display help',
     '   --domain[=docker]      Set your domain. (set the /etc/resolver/{domain} accordingly)',
