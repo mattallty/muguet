@@ -40,7 +40,7 @@ Cli.prototype.run = function () {
 
   var app = new App(
     HttpProxyDriver,
-    this.options['domain'],
+    this.options.domain,
     this.options['api-port'],
     this.options['proxy-ip'],
     this.options['dns-ip'],

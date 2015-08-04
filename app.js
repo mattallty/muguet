@@ -90,7 +90,7 @@ App.prototype._onContainerChange = function (containers) {
  * @private
  */
 App.prototype._onError = function (err) {
-  exec('boot2docker status', function (error, stdout, stderr) {
+  exec('boot2docker status', function (error, stdout) {
     if (stdout.trim() === 'poweroff') {
       return Logger.error("Your boot2docker VM does not seem to be started. Please run `boot2docker up`.");
     }
