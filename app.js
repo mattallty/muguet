@@ -106,7 +106,7 @@ App.prototype._onError = function (err) {
  */
 App.prototype.getProxyRoutes = function () {
 
-  var flags = DockerContainer.IS_RUNNING | DockerContainer.HAS_PROXY_ENABLED
+  var flags = DockerContainer.IS_RUNNING | DockerContainer.HAS_PROXY_ENABLED | DockerContainer.HAS_EXPOSED_PORTS;
 
   var routes = ContainersHelper.filterContainers(this.containers, flags).map(function (cnt) {
     return cnt.getProxyRoutes(this.domain)
