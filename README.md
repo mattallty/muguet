@@ -15,9 +15,7 @@ When using Docker, it's sometimes a pain to access your containers using specifi
 that resolves auto-generated hostnames to your containers IPs, 
 plus a [Reverse Proxy](https://en.wikipedia.org/wiki/Reverse_proxy) to access all your web apps on port 80. 
 
-<p align="center">
-  <img src="https://github.com/mattallty/muguet/blob/master/assets/muguet-schema.png">
-</p>
+![Muguet](assets/muguet-schema.png)
 
 ## Prerequisites
 
