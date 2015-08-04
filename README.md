@@ -142,6 +142,7 @@ A comma-separated list of `subdomain:port` to map.
 
 A REST API is available on port `9876` (customizable with `--api-port`) 
 to retrieve the reverse-proxy routes as well as DNS entries.
+A default domain `muguet.docker`is generated so you can access the API through [http://muguet.docker:9876](http://muguet.docker:9876)
 
 ### Routes
     
