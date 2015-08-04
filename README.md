@@ -42,9 +42,8 @@ $ sudo route -n add 172.17.0.0/16 `boot2docker ip`
 ## Usage
 
 ```bash
-sudo muguet [options]
 
-# or (recommended)
+# the '-E bash' allows passing env vars, such as DOCKER_HOST, to muguet
 sudo -E bash -c 'muguet [options]'
 
 ```
