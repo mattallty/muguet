@@ -3,15 +3,16 @@
 "use strict";
 
 var VERSION = require('../package.json').version
+  , Network = require('../lib/network')
 
 /*
 
- -h | --help            Display help
- --domain[=docker]      Set your domain. (set the /etc/resolver/{domain} accordingly)
- --api-port[=9876]      Set the REST API port
- --proxy-ip[=127.0.0.1] IP of the proxy server. Specify it when not in a local environment.
- --dns-ip[=127.0.0.1]   IP of the DNS server
- --dns-port[=9999]      Set the DNS server port
+ -h | --help                  Display help
+ --domain[=docker]            Set your domain. (set the /etc/resolver/{domain} accordingly)
+ --api-port[=9876]            Set the REST API port
+ --proxy-ip[=10.254.254.254]  IP of the proxy server. Specify it when not in a local environment.
+ --dns-ip[=127.0.0.1]         IP of the DNS server
+ --dns-port[=53]              Set the DNS server port
  */
 
 var parseArgs = require('minimist')
@@ -28,9 +29,9 @@ var Cli = exports.Cli = function (argv) {
   this.options = defaults(this.argv, {
     'domain': 'docker',
     'api-port': 9876,
-    'proxy-ip': '127.0.0.1',
+    'proxy-ip': '10.254.254.254',
     'dns-ip': '127.0.0.1',
-    'dns-port': 9999
+    'dns-port': 53
   })
 }
 
@@ -54,6 +55,8 @@ Cli.prototype.run = function () {
     this.options['dns-ip'],
     this.options['dns-port']
   )
+
+  Network.setupLoopback(this.options['proxy-ip'])
 
   app.run()
 }

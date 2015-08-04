@@ -21,22 +21,33 @@ plus a [Reverse Proxy](https://en.wikipedia.org/wiki/Reverse_proxy) to access al
 
   - A running [Docker](https://www.docker.com/) environment
   - [Node.js](https://nodejs.org/) or [io.js](https://iojs.org)
-  
 
 ## Install
+
+ - **Configure Networking**
+ 
+```bash
+# Add an alias to lo0 
+sudo ifconfig lo0 alias 10.254.254.254
+
+# Route paquets to the boot2docker VM
+sudo route -n add 172.17.0.0/16 `boot2docker ip`
+
+# Edit boot2docker profile by executing
+boot2docker ssh -t sudo vi /var/lib/boot2docker/profile
+ 
+# and copy paste the following contents
+EXTRA_ARGS="--dns 10.254.254.254"
+
+# quit (:wq)
+
+# restart boot2docker VM
+boot2docker restart
+```
 
  - **Install Muguet**
 ```bash
 npm install -g muguet
-```
-
- - **Setup routing**
- 
-If you are using [boot2docker](http://boot2docker.io/) you must add a routing rule 
-to redirect packets to the *boot2docker* VM.
-
-```
-$ sudo route -n add 172.17.0.0/16 `boot2docker ip`
 ```
 
 ## Usage
@@ -57,7 +68,7 @@ Available options:
 --proxy-ip[=127.0.0.1] IP of the proxy server. Specify it when not in a local environment.
 --api-port[=9876]      Set the REST API port
 --dns-ip[=127.0.0.1]   IP of the DNS server
---dns-port[=9999]      Set the DNS server port
+--dns-port[=53]        Set the DNS server port
 ```
 
 ## Generated hostnames
