@@ -76,7 +76,26 @@ For each container, *Muguet* generates several DNS entries:
   - And possibly others based on the `org.muguet.dns.subdomain-map` label (see below) 
 
 
-### Examples
+
+## Labels
+
+Docker `labels` are used as configuration settings.
+
+#### org.muguet.reverse-proxy.enabled
+
+Set it to `1` to enable the reverse-proxy (only enable reverse-proxy for web apps).
+
+
+#### org.muguet.reverse-proxy.only-ports
+
+A comma-separated list of ports that you want to *proxify*. 
+
+
+#### org.muguet.dns.subdomain-map
+
+A comma-separated list of `subdomain:port` to map.
+
+## Example
 
 ```yml
 # site1 will be accessible on http://site1.docker 
@@ -120,27 +139,6 @@ bigcontainer:
     
 ```
     
----
-
-## Labels
-
-Docker `labels` are used as configuration settings.
-
-#### org.muguet.reverse-proxy.enabled
-
-Set it to `1` to enable the reverse-proxy (only enable reverse-proxy for web apps).
-
-
-#### org.muguet.reverse-proxy.only-ports
-
-A comma-separated list of ports that you want to *proxify*. 
-
-
-#### org.muguet.dns.subdomain-map
-
-A comma-separated list of `subdomain:port` to map.
-
-
 ## REST API
 
 A REST API is available on port `9876` (customizable with `--api-port`) 
