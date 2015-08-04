@@ -33,7 +33,7 @@ npm install -g muguet
  - **Setup routing**
  
 If you are using [boot2docker](http://boot2docker.io/) you must add a routing rule 
-to redirect the packets to the *boot2docker* VM.
+to redirect packets to the *boot2docker* VM.
 
 ```
 $ sudo route -n add 172.17.0.0/16 `boot2docker ip`
