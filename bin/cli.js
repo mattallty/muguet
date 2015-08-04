@@ -55,7 +55,7 @@ Cli.prototype.run = function () {
 Cli.prototype.help = function () {
 
   var helpStr = [
-    ' Muguet 1.0.3',
+    ' Muguet 1.0.4',
     '',
     '   -h | --help            Display help',
     '   --domain[=docker]      Set your domain. (set the /etc/resolver/{domain} accordingly)',
