@@ -418,7 +418,7 @@ var containers = {
             "Image": "rtbplatform_bidder",
             "Command": "/bin/sh -c 'npm install && npm start && pm2 logs'",
             "Created": 1438177185,
-            "Ports": [{"IP": "0.0.0.0", "PrivatePort": 8888, "PublicPort": 32808, "Type": "tcp"}],
+            "Ports": [{"IP": "0.0.0.0", "PrivatePort": 8888, "Type": "tcp"}],
             "Labels": {
                 "com.docker.compose.config-hash": "134ca8159657367c338d69a954bd90861da9c21e59591684441cee3805e75ed5",
                 "com.docker.compose.container-number": "1",
