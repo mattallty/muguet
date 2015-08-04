@@ -119,7 +119,7 @@ var containers = {
                     "com.docker.compose.project": "rtbplatform",
                     "com.docker.compose.service": "bidder",
                     "com.docker.compose.version": "1.3.0",
-                    "org.dc.http-proxy.enabled": "1"
+                    "org.muguet.reverse-proxy.enabled": "1"
                 }
             }
         },
@@ -140,7 +140,7 @@ var containers = {
                 "com.docker.compose.project": "rtbplatform",
                 "com.docker.compose.service": "bidder",
                 "com.docker.compose.version": "1.3.0",
-                "org.dc.http-proxy.enabled": "1"
+                "org.muguet.reverse-proxy.enabled": "1"
             },
             "Status": "Up 20 hours"
         }
@@ -264,10 +264,8 @@ var containers = {
                     "com.docker.compose.oneoff": "False",
                     "com.docker.compose.project": "rtbplatform",
                     "org.dc.http-proxy.web-port" : "8888",
-                    "com.docker.compose.service": "bidder",
                     "com.docker.compose.version": "1.3.0",
-                    "org.dc.http-proxy.enabled": "0",
-                    "org.dc.http-proxy.sub-domain": "foo"
+                    "org.muguet.reverse-proxy.enabled": "0"
                 }
             }
         },
@@ -284,9 +282,8 @@ var containers = {
                 "com.docker.compose.oneoff": "False",
                 "com.docker.compose.project": "rtbplatform",
                 "org.dc.http-proxy.web-port" : "8888",
-                "com.docker.compose.service": "bidder",
                 "com.docker.compose.version": "1.3.0",
-                "org.dc.http-proxy.enabled": "0",
+                "org.muguet.reverse-proxy.enabled": "0",
                 "org.dc.http-proxy.sub-domain": "foo"
             },
             "Status": "Exit 20 hours"
@@ -411,7 +408,7 @@ var containers = {
                     "com.docker.compose.oneoff": "False",
                     "com.docker.compose.project": "rtbplatform",
                     "com.docker.compose.version": "1.3.0",
-                    "org.dc.http-proxy.enabled": "1"
+                    "org.muguet.reverse-proxy.enabled": "1"
                 }
             }
         },
@@ -428,7 +425,7 @@ var containers = {
                 "com.docker.compose.oneoff": "False",
                 "com.docker.compose.project": "rtbplatform",
                 "com.docker.compose.version": "1.3.0",
-                "org.dc.http-proxy.enabled": "1"
+                "org.muguet.reverse-proxy.enabled": "1"
             },
             "Status": "Up 20 hours"
         }
@@ -552,11 +549,9 @@ var containers = {
                     "com.docker.compose.oneoff": "False",
                     "com.docker.compose.project": "rtbplatform",
                     "com.docker.compose.version": "1.3.0",
-                    "org.dc.http-proxy.enabled": "1",
-                    "org.dc.http-proxy.port-80-subdomain" : "foo",
-                    "org.dc.http-proxy.port-8888-subdomain" : "bar",
-                    "org.dc.http-proxy.port-9999-subdomain" : "foo-bar",
-                    "org.dc.http-proxy.only-ports" : "80,9999"
+                    "org.muguet.reverse-proxy.enabled": "1",
+                    "org.muguet.dns.subdomain-map" : "foo:80,bar:8888,foo-bar:9999",
+                    "org.muguet.reverse-proxy.only-ports" : "80,9999"
                 }
             }
         },
@@ -573,11 +568,9 @@ var containers = {
                 "com.docker.compose.oneoff": "False",
                 "com.docker.compose.project": "rtbplatform",
                 "com.docker.compose.version": "1.3.0",
-                "org.dc.http-proxy.enabled": "1",
-                "org.dc.http-proxy.port-80-subdomain" : "foo",
-                "org.dc.http-proxy.port-8888-subdomain" : "bar",
-                "org.dc.http-proxy.port-9999-subdomain" : "foo-bar",
-                "org.dc.http-proxy.only-ports" : "80,9999"
+                "org.muguet.reverse-proxy.enabled": "1",
+                "org.muguet.dns.subdomain-map" : "foo:80,bar:8888,foo-bar:9999",
+                "org.muguet.reverse-proxy.only-ports" : "80,9999"
             },
             "Status": "Up 20 hours"
         }

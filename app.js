@@ -25,13 +25,18 @@ var App = function (ProxyDriver, domain, api_port, proxy_ip, dns_ip, dns_port) {
   this.domain = domain
   this.apiPort = api_port
   this.proxyIp = proxy_ip
+  this.dnsIp = dns_ip
+  this.dnsPort = dns_port
 
   // DNS stuff
   this.dnsServer = new DNSServer(this, domain);
-  this.dnsServer.listen(dns_port, dns_ip)
 
   // proxy
   this.proxy = new HTTPProxy(this.proxyDriver, this.dnsServer)
+}
+
+App.prototype.getDockerInfos = function () {
+  return this.dockerInfos;
 }
 
 /**
@@ -39,6 +44,7 @@ var App = function (ProxyDriver, domain, api_port, proxy_ip, dns_ip, dns_port) {
  */
 App.prototype.run = function () {
   Logger.info("Starting Muguet App")
+  this.dnsServer.listen(this.dnsPort, this.dnsIp)
   var watcher = new DockerWatcher(this, dockerode, this.dockerInfos).run()
   watcher
     .on('setup', this._onContainerSetup.bind(this))
