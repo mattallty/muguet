@@ -1,10 +1,7 @@
 "use strict";
 
 var should = require('should')
-  , App = require('../../../app')
-  , HttpProxyDriver = require('http-proxy')
-  , HTTPDriver = require('http')
-  , DNSDriver = require('node-named')
+  , app = require('../../fixtures/app').app
   , DockerContainer = require('../../../lib/docker-container')
   , ContainersFixtures = require('../../fixtures/containers')
   ;
@@ -15,11 +12,9 @@ describe('docker-container', function () {
   var container2
   var container3
   var container4
-  var app;
 
   before(function () {
     process.env.DOCKER_HOST = 'tcp://192.168.59.103:2376'
-    app = new App(HttpProxyDriver, DNSDriver, 'docker', 9876, '127.0.0.1', '127.0.0.1', 9999);
   })
 
   describe("new DockerContainer()", function () {

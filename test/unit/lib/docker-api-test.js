@@ -2,10 +2,7 @@
 
 var should = require('should')
   , sinon = require('sinon')
-  , App = require('../../../app')
-  , HttpProxyDriver = require('http-proxy')
-  , HTTPDriver = require('http')
-  , DNSDriver = require('node-named')
+  , app = require('../../fixtures/app').app
   , dockerode = require('dockerode')
   , DockerAPI = require('../../../lib/docker-api')
   , ContainersFixtures = require('../../fixtures/containers')
@@ -22,11 +19,9 @@ describe('docker-api', function () {
     ContainersFixtures.container4.basic_info
   ];
 
-  var app;
 
   before(function () {
     process.env.DOCKER_HOST = 'tcp://192.168.59.103:2376'
-    app = new App(HttpProxyDriver, DNSDriver, 'docker', 9876, '127.0.0.1', '127.0.0.1', 9999);
   })
 
   it('should return a DockerAPI instance', function () {

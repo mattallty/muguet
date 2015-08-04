@@ -5,11 +5,12 @@ var DockerWatcher = require('./lib/docker-watcher')
   , ContainersHelper = require('./lib/containers-helper')
   , dockerode = require('dockerode')
   , url = require('url')
-  , colors = require('colors')
   , HTTPProxy = require('./lib/http-proxy')
   , Logger = require('./lib/logger')
   , DNSServer = require('./lib/dns-server').DNSServer
   , exec = require('child_process').exec
+
+require('colors')
 
 /**
  * App

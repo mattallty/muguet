@@ -1,5 +1,6 @@
+"use strict";
+
 var App = require('../../app')
-  , DockerContainer = require('../../lib/docker-container')
   , HttpProxyDriver = require('http-proxy')
   , HTTPDriver = require('http')
   , DNSDriver = require('node-named')
@@ -15,7 +16,7 @@ sinon.stub(DNSDriver, "createServer", function () {
 
   var proto = {
     on : function () {
-
+      return this
     },
     send : function() {
 
@@ -27,6 +28,7 @@ sinon.stub(DNSDriver, "createServer", function () {
   sinon.spy(proto, 'on')
   sinon.spy(proto, 'send')
   sinon.spy(proto, 'listen')
+
   return proto
 })
 
