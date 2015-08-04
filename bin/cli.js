@@ -57,6 +57,7 @@ Cli.prototype.run = function () {
 Cli.prototype.help = function () {
 
   var helpStr = [
+    '',
     ' Muguet ' + VERSION,
     '',
     '   -h | --help            Display help',
