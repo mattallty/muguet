@@ -1,6 +1,6 @@
 {
   "name": "muguet",
-  "version": "1.0.19",
+  "version": "1.1.0",
   "description": "DNS Server & Reverse Proxy for Docker containers",
   "main": "bin/cli.js",
   "scripts": {
