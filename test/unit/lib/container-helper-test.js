@@ -11,7 +11,6 @@ describe('container-helper', function () {
   var containers
 
   before(function () {
-    process.env.DOCKER_HOST = 'tcp://192.168.59.103:2376'
     containers = [
       new DockerContainer(app, ContainersFixtures.container1.basic_info, ContainersFixtures.container1.data),
       new DockerContainer(app, ContainersFixtures.container2.basic_info, ContainersFixtures.container2.data),

@@ -10,7 +10,6 @@ describe('app', function () {
 
   before(function () {
 
-    process.env.DOCKER_HOST = 'tcp://192.168.59.103:2376'
 /*
     containers = [
       new DockerContainer(app, ContainersFixtures.container1.basic_info, ContainersFixtures.container1.data),
@@ -28,7 +27,7 @@ describe('app', function () {
   describe('.getDockerInfos', function() {
     it('should return an object with hostname and port', function() {
       should(app.getDockerInfos()).be.Object()
-      should(app.getDockerInfos()).have.property('hostname', '192.168.59.103')
+      should(app.getDockerInfos()).have.property('hostname', '127.0.0.1')
       should(app.getDockerInfos()).have.property('port', '2376')
     })
   })

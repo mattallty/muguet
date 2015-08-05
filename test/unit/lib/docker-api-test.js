@@ -21,7 +21,6 @@ describe('docker-api', function () {
 
 
   before(function () {
-    process.env.DOCKER_HOST = 'tcp://192.168.59.103:2376'
   })
 
   it('should return a DockerAPI instance', function () {

@@ -14,7 +14,6 @@ describe('docker-container', function () {
   var container4
 
   before(function () {
-    process.env.DOCKER_HOST = 'tcp://192.168.59.103:2376'
   })
 
   describe("new DockerContainer()", function () {
