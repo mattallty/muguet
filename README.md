@@ -141,9 +141,9 @@ bigcontainer:
     
 ## REST API
 
-A REST API is available on port `9876` (customizable with `--api-port`) 
-to retrieve the reverse-proxy routes as well as DNS entries.
-A default domain `muguet.docker`is generated so you can access the API through [http://muguet.docker:9876](http://muguet.docker:9876)
+A dashboard and a REST API are available on port `9876` (customizable with `--api-port`) and proxified on port 80. 
+A default domain `muguet.docker` (or `muguet.{domain}`) is generated so you can access it 
+through [http://muguet.docker](http://muguet.docker)
 
 ### Routes
     
