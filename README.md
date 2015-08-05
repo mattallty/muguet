@@ -34,7 +34,7 @@ sudo ifconfig lo0 alias 10.254.254.254
 sudo route -n add 172.17.0.0/16 `boot2docker ip`
 
 # Edit boot2docker profile by executing
-boot2docker ssh -t 'sudo touch /var/lib/boot2docker/profile && echo EXTRA_ARGS="--dns 10.254.254.254" | sudo tee /var/lib/boot2docker/profile'
+boot2docker ssh -t 'sudo touch /var/lib/boot2docker/profile && echo EXTRA_ARGS=\"--dns 10.254.254.254\" | sudo tee /var/lib/boot2docker/profile'
  
 # restart boot2docker VM
 boot2docker restart
