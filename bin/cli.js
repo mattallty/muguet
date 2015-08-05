@@ -45,6 +45,10 @@ Cli.prototype.run = function () {
     return Logger.error("This program must be run as root.\n");
   }
 
+  if (!process.env.DOCKER_HOST) {
+    return Logger.error("Please set the DOCKER_HOST environment variable before running Muguet.\n");
+  }
+
   var app = new App(
     HttpProxyDriver,
     HTTPDriver,

@@ -4,6 +4,9 @@ node_js:
   - "stable"
   - "iojs"
 
+env:
+  - DOCKER_HOST=tcp://127.0.0.1:2376
+
 cache:
   directories:
     - node_modules
