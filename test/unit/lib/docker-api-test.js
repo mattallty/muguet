@@ -1,9 +1,7 @@
 "use strict";
 
 var should = require('should')
-  , sinon = require('sinon')
   , app = require('../../fixtures/app').app
-  , dockerode = require('dockerode')
   , DockerAPI = require('../../../lib/docker-api')
   , DockerContainer = require('../../../lib/docker-container')
 

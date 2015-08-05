@@ -5,7 +5,6 @@ var App = require('../../app')
   , HTTPDriver = require('http')
   , DNSDriver = require('node-named')
   , sinon = require('sinon')
-  , DockerContainer = require('../../lib/docker-container')
   , ContainersFixtures = require('../fixtures/containers')
 
 process.env.DOCKER_HOST = "tcp://127.0.0.1:2376"

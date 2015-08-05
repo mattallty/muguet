@@ -3,7 +3,6 @@
 var DockerWatcher = require('./lib/docker-watcher')
   , DockerContainer = require('./lib/docker-container')
   , ContainersHelper = require('./lib/containers-helper')
-  , dockerode = require('dockerode')
   , url = require('url')
   , HTTPProxy = require('./lib/http-proxy')
   , Logger = require('./lib/logger')
