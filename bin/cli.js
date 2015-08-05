@@ -4,6 +4,7 @@
 
 var VERSION = require('../package.json').version
   , Network = require('../lib/network')
+  , request = require('request')
 
 /*
 
@@ -59,6 +60,21 @@ Cli.prototype.run = function () {
     this.options['dns-ip'],
     this.options['dns-port']
   )
+
+  // check version
+  request('https://raw.githubusercontent.com/mattallty/muguet/master/package.json', function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var lastVersion = JSON.parse(body).version
+      if (app.version != lastVersion) {
+        Logger.warn(
+          String('Your muguet version ('+app.version+') is not up to date (latest version is ' + lastVersion + ')').black.bgYellow
+        )
+        Logger.warn(
+          String('Consider upgrading using: (sudo) npm install -g muguet').black.bgYellow
+        )
+      }
+    }
+  })
 
   Network.setupLoopback(this.options['proxy-ip'])
 

@@ -39,6 +39,7 @@
     "minimist": "^1.1.2",
     "node-named": "0.0.1",
     "promise": "^7.0.3",
+    "request": "^2.60.0",
     "winston": "^1.0.1"
   },
   "devDependencies": {
