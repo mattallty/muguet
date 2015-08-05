@@ -63,11 +63,11 @@ Cli.prototype.run = function () {
 
   // check version
   request('https://raw.githubusercontent.com/mattallty/muguet/master/package.json', function (error, response, body) {
-    if (!error && response.statusCode == 200) {
+    if (!error && response.statusCode === 200) {
       var lastVersion = JSON.parse(body).version
-      if (app.version != lastVersion) {
+      if (app.version !== lastVersion) {
         Logger.warn(
-          String('Your muguet version ('+app.version+') is not up to date (latest version is ' + lastVersion + ')').black.bgYellow
+          String('Your muguet version (' + app.version + ') is not up to date (latest version is ' + lastVersion + ')').black.bgYellow
         )
         Logger.warn(
           String('Consider upgrading using: (sudo) npm install -g muguet').black.bgYellow

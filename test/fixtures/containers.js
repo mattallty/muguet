@@ -281,7 +281,7 @@ var containers = {
                 "com.docker.compose.oneoff": "False",
                 "com.docker.compose.project": "rtbplatform",
                 "org.dc.http-proxy.web-port" : "8888",
-                "com.docker.compose.version": "1.3.0",
+                "com.docker.compose.version": "1.3.0"
             },
             "Status": "Exit 20 hours"
         }

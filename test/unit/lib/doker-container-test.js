@@ -91,7 +91,7 @@ describe('docker-container', function () {
       should(container4.getSubDomainMap()).be.Object().and.containEql(expected);
     });
     it('should return a empty object for container without subdomain map defined', function () {
-      should(container1.getSubDomainMap()).be.Object().and.empty
+      should(container1.getSubDomainMap()).be.Object().and.empty()
     });
   });
 
@@ -252,7 +252,7 @@ describe('docker-container', function () {
     })
 
     it('should return and empty array for proxy-disabled containers', function () {
-      container2.getProxyRoutes().should.be.Array().and.empty
+      container2.getProxyRoutes().should.be.Array().and.empty()
     })
 
   })
