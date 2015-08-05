@@ -30,12 +30,13 @@ var App = function (ProxyDriver, HTTPDriver, DNSDriver, domain, api_port, proxy_
   this.proxyIp = proxy_ip
   this.dnsIp = dns_ip
   this.dnsPort = dns_port
+  this.version = require('./package.json').version
 
   // DNS stuff
   this.dnsServer = new DNSServer(this, this.dnsDriver, domain);
 
   // proxy
-  this.proxy = new HTTPProxy(this.proxyDriver, this.httpDriver, this.dnsServer)
+  this.proxy = new HTTPProxy(this, this.proxyDriver, this.httpDriver, this.dnsServer)
 }
 
 /**
@@ -60,11 +61,22 @@ App.prototype.run = function () {
 }
 
 /**
- * Gte proxy IP address
+ * Get proxy IP address
+ *
  * @returns {String}
  */
 App.prototype.getProxyIp = function () {
   return this.proxyIp
+}
+
+
+/**
+ * Get domain
+ *
+ * @returns {String}
+ */
+App.prototype.getDomain = function () {
+  return this.domain
 }
 
 /**
@@ -120,8 +132,8 @@ App.prototype.getProxyRoutes = function () {
   var flags = DockerContainer.IS_RUNNING | DockerContainer.HAS_PROXY_ENABLED | DockerContainer.HAS_EXPOSED_PORTS;
 
   var routes = ContainersHelper.filterContainers(this.containers, flags).map(function (cnt) {
-    return cnt.getProxyRoutes(this.domain)
-  }.bind(this))
+    return cnt.getProxyRoutes()
+  })
 
   if (routes.length) {
     routes = routes.reduce(function (prev, next) {
@@ -137,17 +149,18 @@ App.prototype.getProxyRoutes = function () {
  */
 App.prototype.getDnsEntries = function () {
 
-  var entries = this.containers.map(function (cnt) {
-    return cnt.getDnsEntries(this.domain)
-  }.bind(this))
-
-  if (entries.length) {
-    entries = entries.reduce(function (prev, next) {
-      return prev.concat(next)
+  var finalEntries = {}
+    , entries = this.containers.map(function (cnt) {
+      return cnt.getDnsEntries()
     })
-  }
 
-  return entries
+  entries.forEach(function (entry) {
+    for (var n in entry) {
+      finalEntries[n] = (finalEntries[n] || []).concat(entry[n])
+    }
+  })
+
+  return finalEntries
 }
 
 module.exports = App
