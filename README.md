@@ -58,12 +58,12 @@ Notes:
 Available options:
 
 ```
-    -h | --help            Display help
-    --domain[=docker]      Set your domain. (set the /etc/resolver/{domain} accordingly)
-    --proxy-ip[=127.0.0.1] IP of the proxy server. Specify it when not in a local environment.
-    --api-port[=9876]      Set the REST API port
-    --dns-ip[=127.0.0.1]   IP of the DNS server
-    --dns-port[=53]        Set the DNS server port
+-h | --help            Display help
+--domain[=docker]      Set your domain. (set the /etc/resolver/{domain} accordingly)
+--proxy-ip[=127.0.0.1] IP of the proxy server. Specify it when not in a local environment.
+--api-port[=9876]      Set the REST API port
+--dns-ip[=127.0.0.1]   IP of the DNS server
+--dns-port[=53]        Set the DNS server port
 ```
 
 ## Generated hostnames
