@@ -139,7 +139,7 @@ bigcontainer:
     
 ```
     
-## REST API
+## Dashboard & REST API
 
 A dashboard and a REST API are available on port `9876` (customizable with `--api-port`) and proxified on port 80. 
 A default domain `muguet.docker` (or `muguet.{domain}`) is generated so you can access it 
