@@ -19,12 +19,13 @@ require('colors')
  *
  * @constructor
  */
-var App = function (ProxyDriver, HTTPDriver, DNSDriver, domain, api_port, proxy_ip, dns_ip, dns_port) {
+var App = function (ProxyDriver, HTTPDriver, DNSDriver, DockerDriver, domain, api_port, proxy_ip, dns_ip, dns_port) {
 
   this.dockerInfos = url.parse(process.env.DOCKER_HOST)
   this.proxyDriver = ProxyDriver
   this.httpDriver = HTTPDriver
   this.dnsDriver = DNSDriver
+  this.dockerDriver = DockerDriver
   this.domain = domain
   this.apiPort = api_port
   this.proxyIp = proxy_ip
@@ -50,10 +51,17 @@ App.prototype.getDockerInfos = function () {
 /**
  * Run the app
  */
-App.prototype.run = function () {
+App.prototype.run = function (listen) {
+
   Logger.info("Starting Muguet App".green)
+
   this.dnsServer.listen(this.dnsPort, this.dnsIp)
-  var watcher = new DockerWatcher(this, dockerode, this.dockerInfos).run()
+  var watcher = new DockerWatcher(this).run()
+
+  if (!listen) {
+    return Logger.info("Skipping watcher listening")
+  }
+
   watcher
     .on('setup', this._onContainerSetup.bind(this))
     .on('change', this._onContainerChange.bind(this))

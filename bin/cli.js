@@ -5,6 +5,7 @@
 var VERSION = require('../package.json').version
   , Network = require('../lib/network')
   , request = require('request')
+  , DockerDriver = require('dockerode')
 
 /*
 
@@ -54,6 +55,7 @@ Cli.prototype.run = function () {
     HttpProxyDriver,
     HTTPDriver,
     DNSDriver,
+    DockerDriver,
     this.options.domain,
     this.options['api-port'],
     this.options['proxy-ip'],
@@ -78,7 +80,7 @@ Cli.prototype.run = function () {
 
   Network.setupLoopback(this.options['proxy-ip'])
 
-  app.run()
+  app.run(true)
 }
 
 Cli.prototype.help = function () {
