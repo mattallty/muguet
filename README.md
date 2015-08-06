@@ -2,7 +2,7 @@
 
 # Muguet
 
-[![Coverage Status](https://coveralls.io/repos/mattallty/muguet/badge.svg?branch=master&service=github)](https://coveralls.io/github/mattallty/muguet?branch=master)
+[![Build Status](https://travis-ci.org/mattallty/muguet.svg?branch=master)](https://travis-ci.org/mattallty/muguet) [![Coverage Status](https://coveralls.io/repos/mattallty/muguet/badge.svg?branch=master&service=github)](https://coveralls.io/github/mattallty/muguet?branch=master)
 
 > *Muguet* is a DNS Server & Reverse proxy for Docker environments.
 
