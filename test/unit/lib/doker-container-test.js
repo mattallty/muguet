@@ -230,7 +230,7 @@ describe('docker-container', function () {
     it('should return the routes for proxy-enabled containers', function () {
       var expectedCnt1 = [ { hostname: 'bidder.docker-test',
         hostname_aliases: [ '6bbc6ec863f0.docker-test' ],
-        port: 80,
+        port: 8083,
         container_public_addr: '127.0.0.1',
         container_public_port: 32809,
         container_private_addr: '172.17.0.31',
