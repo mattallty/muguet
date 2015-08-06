@@ -4,8 +4,6 @@ node_js:
   - "stable"
   - "iojs"
 
-sudo: required
-
 env:
   - DOCKER_HOST=tcp://127.0.0.1:2376
 
