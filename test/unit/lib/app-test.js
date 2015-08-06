@@ -2,7 +2,6 @@
 
 var should = require('should')
   , app = require('../../fixtures/app').app
-  , dns = require('dns')
   , dnsInfo = require('dns-info')
 
 var Promise = typeof Promise === 'undefined' ?
