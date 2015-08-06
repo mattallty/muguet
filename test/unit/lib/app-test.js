@@ -37,7 +37,7 @@ describe('app', function () {
 
       app.run(true)
 
-      dns.setServers(['127.0.0.1'])
+      //dns.setServers(['127.0.0.1'])
 
       var checkDns1 = function() {
         return dnsInfo({
@@ -53,6 +53,16 @@ describe('app', function () {
       var checkDns2 = function() {
         return dnsInfo({
           domain: 'foo-bar.6bbc6ec863f0.docker-test',
+          server: {
+            address: '127.0.0.1',
+            port: 9988,
+            type: 'udp'
+          }
+        })
+      }
+      var checkDns3 = function() {
+        return dnsInfo({
+          domain: 'google.fr',
           server: {
             address: '127.0.0.1',
             port: 9988,
@@ -76,9 +86,9 @@ describe('app', function () {
         app.dnsServer.getPort().should.equal(9988)
 
         // test DNS
-        Promise.all([checkDns1(), checkDns2()]).then(function(addrs) {
+        Promise.all([checkDns1(), checkDns2(), checkDns3()]).then(function(addrs) {
           console.log(JSON.stringify(addrs))
-          addrs.should.be.Array().with.length(2);
+          addrs.should.be.Array().with.length(3);
           app.dnsServer.close()
           done()
         }).catch(function(err) {
