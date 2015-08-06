@@ -71,7 +71,7 @@ var app = new App(
   9876,
   '127.0.0.1',
   '127.0.0.1',
-  53
+  9988
 )
 
 exports.app = app;

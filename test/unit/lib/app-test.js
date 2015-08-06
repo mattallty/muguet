@@ -3,6 +3,7 @@
 var should = require('should')
   , app = require('../../fixtures/app').app
   , dns = require('dns')
+  , dnsInfo = require('dns-info')
 
 var Promise = typeof Promise === 'undefined' ?
   require('promise/lib/es6-extensions') :
@@ -39,25 +40,25 @@ describe('app', function () {
       dns.setServers(['127.0.0.1'])
 
       var checkDns1 = function() {
-        return new Promise(function(resolve, reject) {
-          dns.resolve('bidder.docker-test', 'A', function (err, addresses) {
-            if (err) {
-              return reject(err)
-            }
-            resolve(addresses)
-          });
-        });
+        return dnsInfo({
+          domain: 'bidder.docker-test',
+          server: {
+            address: '127.0.0.1',
+            port: 9988,
+            type: 'udp'
+          }
+        })
       }
 
       var checkDns2 = function() {
-        return new Promise(function(resolve, reject) {
-          dns.resolve('foo-bar.6bbc6ec863f0.docker-test', 'A', function (err, addresses) {
-            if (err) {
-              return reject(err)
-            }
-            resolve(addresses)
-          });
-        });
+        return dnsInfo({
+          domain: 'foo-bar.6bbc6ec863f0.docker-test',
+          server: {
+            address: '127.0.0.1',
+            port: 9988,
+            type: 'udp'
+          }
+        })
       }
 
       setTimeout(function () {
@@ -72,14 +73,12 @@ describe('app', function () {
           'muguet.docker-test': '127.0.0.1'
         })
 
-        app.dnsServer.getPort().should.equal(53)
+        app.dnsServer.getPort().should.equal(9988)
 
         // test DNS
         Promise.all([checkDns1(), checkDns2()]).then(function(addrs) {
-          console.log(addrs)
+          console.log(JSON.stringify(addrs))
           addrs.should.be.Array().with.length(2);
-          addrs[0][0].should.be.equal('127.0.0.1')
-          addrs[1][0].should.be.equal('127.0.0.1')
           app.dnsServer.close()
           done()
         }).catch(function(err) {

@@ -47,6 +47,7 @@
   "devDependencies": {
     "blanket": "^1.1.7",
     "coveralls": "^2.11.3",
+    "dns-info": "^0.1.0",
     "eslint": "^0.24.1",
     "istanbul": "^0.3.17",
     "mocha": "^2.2.5",
