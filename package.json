@@ -5,8 +5,9 @@
   "main": "bin/cli.js",
   "scripts": {
     "start": "node ./bin/cli.js",
-    "test": "TEST_MODE=1 ./node_modules/.bin/_mocha --full-trace --recursive test/unit",
-    "coverage": "TEST_MODE=1 ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report html -- -R spec --recursive test/unit",
+    "test": "TEST_MODE=1 sudo -E bash -c './node_modules/.bin/_mocha --full-trace --no-timeouts --recursive test/unit'",
+    "test-ci": "TEST_MODE=1 './node_modules/.bin/_mocha --full-trace --no-timeouts --recursive test/unit",
+    "coverage": "TEST_MODE=1  sudo -E bash -c './node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report html -- -R spec --recursive test/unit'",
     "coverage-ci": "TEST_MODE=1 ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec --recursive test/unit && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "lint": "rm -rf ./coverage && node_modules/.bin/eslint ."
   },

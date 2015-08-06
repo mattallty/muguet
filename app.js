@@ -4,6 +4,7 @@ var DockerWatcher = require('./lib/docker-watcher')
   , DockerContainer = require('./lib/docker-container')
   , ContainersHelper = require('./lib/containers-helper')
   , url = require('url')
+  , Network = require('./lib/network')
   , HTTPProxy = require('./lib/http-proxy')
   , Logger = require('./lib/logger')
   , DNSServer = require('./lib/dns-server').DNSServer
@@ -50,16 +51,14 @@ App.prototype.getDockerInfos = function () {
 /**
  * Run the app
  */
-App.prototype.run = function (listen) {
+App.prototype.run = function () {
 
   Logger.info("Starting Muguet App".green)
 
+  Network.setupResolver(this.domain, this.dnsPort, this.dnsIp)
+
   this.dnsServer.listen(this.dnsPort)
   var watcher = new DockerWatcher(this).run()
-
-  if (!listen) {
-    return Logger.info("Skipping watcher listening")
-  }
 
   watcher
     .on('setup', this._onContainerSetup.bind(this))

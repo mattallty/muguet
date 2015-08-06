@@ -86,7 +86,7 @@ Cli.prototype.run = function () {
       routePaquets()
     }
 
-    app.run(true)
+    app.run()
   }
 }
 

@@ -59,9 +59,20 @@ sinon.stub(DNSDriver, "createServer", function () {
   sinon.spy(proto, 'listen')
 
   return proto
-})*/
+})
+*/
 
-var app = new App(exports.HttpProxyDriver, HTTPDriver, DNSDriver, exports.Dockerode, 'docker-test', 9876, '127.0.0.1', '127.0.0.1', 9999)
+var app = new App(
+  exports.HttpProxyDriver,
+  HTTPDriver,
+  DNSDriver,
+  exports.Dockerode,
+  'docker-test',
+  9876,
+  '127.0.0.1',
+  '127.0.0.1',
+  53
+)
 
 exports.app = app;
 exports.DNSDriver = DNSDriver;
