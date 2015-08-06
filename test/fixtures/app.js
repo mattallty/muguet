@@ -40,6 +40,7 @@ sinon.stub(exports, 'HttpProxyDriver', function () {
   console.log("called with %j", arguments)
 });
 
+/*
 sinon.stub(DNSDriver, "createServer", function () {
 
   var proto = {
@@ -58,9 +59,9 @@ sinon.stub(DNSDriver, "createServer", function () {
   sinon.spy(proto, 'listen')
 
   return proto
-})
+})*/
 
-var app = new App(exports.HttpProxyDriver, HTTPDriver, DNSDriver, exports.Dockerode, 'docker', 9876, '127.0.0.1', '127.0.0.1', 9999)
+var app = new App(exports.HttpProxyDriver, HTTPDriver, DNSDriver, exports.Dockerode, 'docker-test', 9876, '127.0.0.1', '127.0.0.1', 9999)
 
 exports.app = app;
 exports.DNSDriver = DNSDriver;

@@ -40,6 +40,7 @@
     "node-named": "0.0.1",
     "promise": "^7.0.3",
     "request": "^2.60.0",
+    "sync-exec": "^0.6.1",
     "winston": "^1.0.1"
   },
   "devDependencies": {

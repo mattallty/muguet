@@ -24,46 +24,41 @@ plus a [Reverse Proxy](https://en.wikipedia.org/wiki/Reverse_proxy) to access al
 
 ## Install
 
- - **Configure Networking**
- 
-```bash
-# Add an alias to lo0 
-sudo ifconfig lo0 alias 10.254.254.254
-
-# Route paquets to the boot2docker VM
-sudo route -n add 172.17.0.0/16 `boot2docker ip`
-
-# Edit boot2docker profile by executing
-boot2docker ssh -t 'sudo touch /var/lib/boot2docker/profile && echo EXTRA_ARGS=\"--dns 10.254.254.254\" | sudo tee /var/lib/boot2docker/profile'
- 
-# restart boot2docker VM
-boot2docker restart
-```
-
  - **Install Muguet**
 ```bash
 npm install -g muguet
 ```
 
+ - **Setup environment**
+```bash
+sudo -E bash -c 'muguet setup' 
+```
+
+ - **Start Muguet**
+```bash
+sudo -E bash -c 'muguet up' 
+```
+
 ## Usage
 
 ```bash
-sudo -E bash -c 'muguet [options]'
+sudo -E bash -c 'muguet up [options]'
 ```
 
 Notes:
   - *Muguet* **must** be run as *root* to be able to bind port 80
-  - `sudo -E bash -c 'muguet [options]'` is recommended as it makes all needed environment variables available to the *muguet* command.
+  - `sudo -E bash -c 'muguet <command> [options]'` is recommended as it makes all needed environment variables available to the *muguet* command.
 
 Available options:
 
 ```
--h | --help            Display help
---domain[=docker]      Set your domain. (set the /etc/resolver/{domain} accordingly)
---proxy-ip[=127.0.0.1] IP of the proxy server. Specify it when not in a local environment.
---api-port[=9876]      Set the REST API port
---dns-ip[=127.0.0.1]   IP of the DNS server
---dns-port[=53]        Set the DNS server port
+-h | --help                     Display help
+--domain[=docker]               Set your domain. (set the /etc/resolver/{domain} accordingly)
+--loopback-ip[=10.254.254.254]  IP of the proxy server. Specify it when not in a local environment.
+--proxy-ip[=10.254.254.254]     IP of the proxy server. Specify it when not in a local environment.
+--api-port[=9876]               Set the REST API port
+--dns-ip[=127.0.0.1]            IP of the DNS server
+--dns-port[=53]                 Set the DNS server port
 ```
 
 ## Generated hostnames

@@ -207,8 +207,8 @@ describe('docker-container', function () {
         .with.length(2)
 
       should(container1.getDnsEntries()['127.0.0.1'])
-        .and.containEql('bidder.docker')
-        .and.containEql('6bbc6ec863f0.docker')
+        .and.containEql('bidder.docker-test')
+        .and.containEql('6bbc6ec863f0.docker-test')
 
     })
 
@@ -220,7 +220,7 @@ describe('docker-container', function () {
         .with.length(1)
 
       should(container2.getDnsEntries()['172.17.0.31'])
-        .and.containEql('6bbc6ec863f0.docker')
+        .and.containEql('6bbc6ec863f0.docker-test')
 
     })
   })
@@ -228,15 +228,15 @@ describe('docker-container', function () {
   describe(".getProxyRoutes()", function () {
 
     it('should return the routes for proxy-enabled containers', function () {
-      var expectedCnt1 = [ { hostname: 'bidder.docker',
-        hostname_aliases: [ '6bbc6ec863f0.docker' ],
+      var expectedCnt1 = [ { hostname: 'bidder.docker-test',
+        hostname_aliases: [ '6bbc6ec863f0.docker-test' ],
         port: 80,
         container_public_addr: '127.0.0.1',
         container_public_port: 32809,
         container_private_addr: '172.17.0.31',
         container_private_port: 9999 },
-        { hostname: 'bidder.docker',
-          hostname_aliases: [ '6bbc6ec863f0.docker' ],
+        { hostname: 'bidder.docker-test',
+          hostname_aliases: [ '6bbc6ec863f0.docker-test' ],
           port: 32808,
           container_public_addr: '127.0.0.1',
           container_public_port: 32808,

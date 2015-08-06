@@ -54,7 +54,7 @@ App.prototype.run = function (listen) {
 
   Logger.info("Starting Muguet App".green)
 
-  this.dnsServer.listen(this.dnsPort, this.dnsIp)
+  this.dnsServer.listen(this.dnsPort)
   var watcher = new DockerWatcher(this).run()
 
   if (!listen) {
