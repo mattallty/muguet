@@ -129,6 +129,9 @@ A dashboard and a REST API are available on port `9876` (customizable with `--ap
 A default domain `muguet.docker` (or `muguet.{domain}`) is generated so you can access it 
 through [http://muguet.docker](http://muguet.docker)
 
+![Muguet Dashboard](assets/muguet-dashboard.png)
+> Muguet dashboard screenshot
+
 ### Routes
     
 #### GET /proxy-routes
