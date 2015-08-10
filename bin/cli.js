@@ -7,6 +7,7 @@ var VERSION = require('../package.json').version
   , request = require('request')
   , setup = require('../lib/check-config').setup
   , hasBoot2Docker = require('../lib/check-config').hasBoot2Docker
+  , guessDockerSettings = require('../lib/check-config').guessDockerSettings
   , routePaquets = require('../lib/check-config').routePaquets
   , DockerDriver = require('dockerode')
   , parseArgs = require('minimist')
@@ -40,7 +41,15 @@ Cli.prototype.run = function () {
   }
 
   if (!process.env.DOCKER_HOST) {
-    return Logger.error("Please set the DOCKER_HOST environment variable before running Muguet.\n");
+
+    var hostFound = guessDockerSettings()
+
+    if (true !== hostFound) {
+      Logger.error("Muguet cannot find the DOCKER_HOST environment variable.\n");
+      Logger.error("Please run muguet the following way to make environment variables accessible in sudo mode:");
+      Logger.error(String("   sudo -E bash -c 'muguet " + this.argv._[0] + "'\n").yellow);
+      return
+    }
   }
 
   if (process.env.USER !== 'root') {
@@ -52,6 +61,8 @@ Cli.prototype.run = function () {
   }
 
   if (this.argv._[0] === 'up') {
+
+    setup(this.options['loopback-ip'])
 
     var app = new App(
       HttpProxyDriver,
@@ -82,8 +93,8 @@ Cli.prototype.run = function () {
 
     Network.setupResolver(this.options.domain, this.options['dns-port'], this.options['dns-ip'])
 
-    if (hasBoot2Docker()) {
-      routePaquets()
+    if (hasBoot2Docker() && !routePaquets()) {
+      return false
     }
 
     app.run()

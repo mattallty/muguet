@@ -29,14 +29,9 @@ plus a [Reverse Proxy](https://en.wikipedia.org/wiki/Reverse_proxy) to access al
 npm install -g muguet
 ```
 
- - **Setup environment**
+ - **Start Muguet (as root)**
 ```bash
-sudo -E bash -c 'muguet setup' 
-```
-
- - **Start Muguet**
-```bash
-sudo -E bash -c 'muguet up' 
+sudo muguet up 
 ```
 
 ## Usage
@@ -47,7 +42,10 @@ sudo -E bash -c 'muguet up [options]'
 
 Notes:
   - *Muguet* **must** be run as *root* to be able to bind port 80
-  - `sudo -E bash -c 'muguet <command> [options]'` is recommended as it makes all needed environment variables available to the *muguet* command.
+  - *Muguet* needs to read *DOCKER_HOST* and *DOCKER_CERT_PATH* environment variables. If these variables are not available, *Muguet*
+    will try to guess it from `boot2docker config` (if boot2docker is detected).
+  - If the previous method fails, please consider running *Muguet* like `sudo -E bash -c 'muguet up'` as it makes all needed environment 
+  variables (eg. from your normal user env) available to the *muguet* command (eg. to the root user).
 
 
 ## Generated hostnames
