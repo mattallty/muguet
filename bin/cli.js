@@ -48,7 +48,7 @@ Cli.prototype.run = function () {
       Logger.error("Muguet cannot find the DOCKER_HOST environment variable.\n");
       Logger.error("Please run muguet the following way to make environment variables accessible in sudo mode:");
       Logger.error(String("   sudo -E bash -c 'muguet " + this.argv._[0] + "'\n").yellow);
-      return
+      return false
     }
   }
 
