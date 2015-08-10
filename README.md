@@ -37,6 +37,9 @@ sudo muguet up
 ## Usage
 
 ```bash
+sudo muguet up [options]
+
+# or
 sudo -E bash -c 'muguet up [options]'
 ```
 
