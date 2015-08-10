@@ -91,8 +91,6 @@ Cli.prototype.run = function () {
       }
     })
 
-    Network.setupResolver(this.options.domain, this.options['dns-port'], this.options['dns-ip'])
-
     if (hasBoot2Docker() && !routePaquets()) {
       return false
     }
