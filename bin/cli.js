@@ -3,7 +3,6 @@
 "use strict";
 
 var VERSION = require('../package.json').version
-  , Network = require('../lib/network')
   , request = require('request')
   , setup = require('../lib/check-config').setup
   , hasBoot2Docker = require('../lib/check-config').hasBoot2Docker
