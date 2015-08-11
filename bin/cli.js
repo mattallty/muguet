@@ -44,9 +44,17 @@ Cli.prototype.run = function () {
     var hostFound = guessDockerSettings()
 
     if (true !== hostFound) {
-      Logger.error("Muguet cannot find the DOCKER_HOST environment variable.\n");
-      Logger.error("Please run muguet the following way to make environment variables accessible in sudo mode:");
-      Logger.error(String("   sudo -E bash -c 'muguet " + this.argv._[0] + "'\n").yellow);
+      if (hostFound === -1) {
+        Logger.error("boot2docker VM has been detected but is not started. Please start it using:");
+        Logger.error('')
+        Logger.error(String("   boot2docker up").yellow);
+        Logger.error('')
+      } else {
+        Logger.error("Muguet cannot find the DOCKER_HOST environment variable.\n");
+        Logger.error("Please run muguet the following way to make environment variables accessible in sudo mode:");
+        Logger.error(String("   sudo -E bash -c 'muguet " + this.argv._[0] + "'\n").yellow);
+      }
+
       return false
     }
   }
@@ -84,7 +92,7 @@ Cli.prototype.run = function () {
             String('Your muguet version (' + app.version + ') is not up to date (latest version is ' + lastVersion + ')').black.bgYellow
           )
           Logger.warn(
-            String('Consider upgrading using: (sudo) npm install -g muguet').black.bgYellow
+            String('Consider upgrading using: (sudo) npm update -g muguet').black.bgYellow
           )
         }
       }
