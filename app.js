@@ -162,7 +162,9 @@ App.prototype.getDnsEntries = function () {
 
   entries.forEach(function (entry) {
     for (var n in entry) {
-      finalEntries[n] = (finalEntries[n] || []).concat(entry[n])
+      if (entry.hasOwnProperty(n)) {
+        finalEntries[n] = (finalEntries[n] || []).concat(entry[n])
+      }
     }
   })
 
