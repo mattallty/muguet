@@ -75,7 +75,6 @@ App.prototype.getProxyIp = function () {
   return this.proxyIp
 }
 
-
 /**
  * Get domain
  *
