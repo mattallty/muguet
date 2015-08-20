@@ -8,7 +8,7 @@
     "test": "TEST_MODE=1 sudo -E bash -c './node_modules/.bin/_mocha --full-trace --no-timeouts --recursive test/unit'",
     "test-ci": "TEST_MODE=1 ./node_modules/.bin/_mocha --full-trace --no-timeouts --recursive test/unit",
     "coverage": "TEST_MODE=1  sudo -E bash -c './node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report html -- -R spec --recursive test/unit'",
-    "coverage-ci": "TEST_MODE=1 ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec --recursive test/unit && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "coverage-ci": "TEST_MODE=1 ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec --recursive test/unit && cat ./coverage/lcov.info | ./node_modules/.bin/codacy-coverage --token bdf5db2544e342ec9792cd0cdf5bc5eb && rm -rf ./coverage",
     "lint": "rm -rf ./coverage && node_modules/.bin/eslint ."
   },
   "repository": {
@@ -46,6 +46,7 @@
   },
   "devDependencies": {
     "blanket": "^1.1.7",
+    "codacy-coverage": "^1.1.2",
     "coveralls": "^2.11.3",
     "dns-info": "^0.1.0",
     "eslint": "^0.24.1",
