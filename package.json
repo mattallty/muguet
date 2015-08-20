@@ -45,7 +45,6 @@
     "winston": "^1.0.1"
   },
   "devDependencies": {
-    "blanket": "^1.1.7",
     "codacy-coverage": "^1.1.2",
     "coveralls": "^2.11.3",
     "dns-info": "^0.1.0",
