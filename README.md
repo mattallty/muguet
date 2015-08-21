@@ -1,4 +1,4 @@
-![Muguet](assets/muguet.png)
+![Muguet](https://github.com/mattallty/muguet/raw/master/assets/muguet.png)
 
 # Muguet
 
@@ -15,7 +15,7 @@ When using Docker, it's sometimes a pain to access your containers using specifi
 that resolves auto-generated hostnames to your containers IPs, 
 plus a [Reverse Proxy](https://en.wikipedia.org/wiki/Reverse_proxy) to access all your web apps on port 80. 
 
-![Muguet](assets/muguet-schema.png)
+![Muguet](https://github.com/mattallty/muguet/raw/master/assets/muguet.png)
 
 ## Prerequisites
 
@@ -130,7 +130,7 @@ A dashboard and a REST API are available on port `9876` (customizable with `--ap
 A default domain `muguet.docker` (or `muguet.{domain}`) is generated so you can access it 
 through [http://muguet.docker](http://muguet.docker)
 
-![Muguet Dashboard](assets/muguet-dashboard.png)
+![Muguet Dashboard](https://github.com/mattallty/muguet/raw/master/assets/muguet-dashboard.png)
 > Muguet dashboard screenshot
 
 ### Routes
