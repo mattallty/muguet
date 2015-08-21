@@ -4,7 +4,8 @@
 
 [![Build Status](https://travis-ci.org/mattallty/muguet.svg?branch=master)](https://travis-ci.org/mattallty/muguet) [![Coverage Status](https://coveralls.io/repos/mattallty/muguet/badge.svg?branch=master&service=github)](https://coveralls.io/github/mattallty/muguet?branch=master)
 
-> *Muguet* is a DNS Server & Reverse proxy for Docker environments.
+> *Muguet* is a DNS Server & Reverse proxy for Docker environments. 
+> Compatible with [docker-compose](https://docs.docker.com/compose/), [boot2docker](http://boot2docker.io/) and [docker-machine](https://docs.docker.com/machine/)
 
 
 ## Introduction
@@ -46,7 +47,7 @@ sudo -E bash -c 'muguet up [options]'
 Notes:
   - *Muguet* **must** be run as *root* to be able to bind port 80
   - *Muguet* needs to read *DOCKER_HOST* and *DOCKER_CERT_PATH* environment variables. If these variables are not available, *Muguet*
-    will try to guess it from `boot2docker config` (if boot2docker is detected).
+    will try to guess it from `docker-machine` or `boot2docker` (if detected).
   - If the previous method fails, please consider running *Muguet* like `sudo -E bash -c 'muguet up'` as it makes all needed environment 
   variables (eg. from your normal user env) available to the *muguet* command (eg. to the root user).
 
