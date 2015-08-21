@@ -5,8 +5,7 @@
 var VERSION = require('../package.json').version
   , request = require('request')
   , setup = require('../lib/check-config').setup
-  , hasBoot2Docker = require('../lib/check-config').hasBoot2Docker
-  , guessDockerSettings = require('../lib/check-config').guessDockerSettings
+  , dockerCli = require('../lib/docker-cli')
   , routePaquets = require('../lib/check-config').routePaquets
   , DockerDriver = require('dockerode')
   , parseArgs = require('minimist')
@@ -41,13 +40,17 @@ Cli.prototype.run = function () {
 
   if (!process.env.DOCKER_HOST) {
 
-    var hostFound = guessDockerSettings()
+    var hostFound = dockerCli.guessDockerSettings()
 
     if (true !== hostFound) {
       if (hostFound === -1) {
-        Logger.error("boot2docker VM has been detected but is not started. Please start it using:");
+        Logger.error("Docker VM has been detected but is not started. Please start it using:");
         Logger.error('')
         Logger.error(String("   boot2docker up").yellow);
+        Logger.error('')
+        Logger.error('or')
+        Logger.error('')
+        Logger.error(String("   docker-machine start default").yellow)
         Logger.error('')
       } else {
         Logger.error("Muguet cannot find the DOCKER_HOST environment variable.\n");
@@ -69,7 +72,7 @@ Cli.prototype.run = function () {
 
   if (this.argv._[0] === 'up') {
 
-    setup(this.options['loopback-ip'])
+    setup(this.options['loopback-ip'], dockerCli)
 
     var app = new App(
       HttpProxyDriver,
@@ -98,7 +101,7 @@ Cli.prototype.run = function () {
       }
     })
 
-    if (hasBoot2Docker() && !routePaquets()) {
+    if (dockerCli.hasDockerExecutable() && !routePaquets(dockerCli)) {
       return false
     }
 
