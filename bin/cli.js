@@ -117,6 +117,8 @@ Cli.prototype.help = function () {
     '',
     '  Usage:',
     '',
+    '     ' + ('sudo muguet') + ' ' + ('<command>').magenta + ' ' + ('[options]').yellow,
+    '     or',
     '     ' + ('sudo -E bash -c \'muguet') + ' ' + ('<command>').magenta + ' ' + ('[options]').yellow + '\'',
     '',
     '  Commands:',
