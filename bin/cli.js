@@ -34,7 +34,10 @@ var Cli = exports.Cli = function (argv) {
 }
 
 Cli.prototype.run = function () {
-
+  if (this.argv.v) {
+    return console.log(VERSION)
+  }
+  
   if (this.argv.help || this.argv.h || this.argv._.length === 0 || ['setup', 'up'].indexOf(this.argv._[0]) === -1) {
     return this.help()
   }
