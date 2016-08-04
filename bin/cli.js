@@ -131,7 +131,7 @@ Cli.prototype.help = function () {
     '     ' + ('-h | --help').yellow + '                      Display help',
     '     ' + ('--domain[=docker]').yellow + '                Set your domain. (set the /etc/resolver/{domain} accordingly)',
     '     ' + ('--proxy-ip[=10.254.254.254]').yellow + '      IP of the proxy server. Specify it when not in a local environment.',
-    '     ' + ('--loopback-ip[=10.254.254.254]').yellow + '   Loppback IP. Used for local development.',
+    '     ' + ('--loopback-ip[=10.254.254.254]').yellow + '   Loopback IP. Used for local development.',
     '     ' + ('--api-port[=9876]').yellow + '                Set the REST API port',
     '     ' + ('--dns-ip[=127.0.0.1]').yellow + '             IP of the DNS server',
     '     ' + ('--dns-port[=9999]').yellow + '                Set the DNS server port',
