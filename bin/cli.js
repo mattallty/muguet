@@ -28,11 +28,15 @@ var Cli = exports.Cli = function (argv) {
     'proxy-ip': '10.254.254.254',
     'loopback-ip': '10.254.254.254',
     'dns-ip': '127.0.0.1',
-    'dns-port': 53
+    'dns-port': 53,
+    'dns-ttl': 10
   })
 }
 
 Cli.prototype.run = function () {
+  if (this.argv.v) {
+    return console.log(VERSION)
+  }
 
   if (this.argv.help || this.argv.h || this.argv._.length === 0 || ['setup', 'up'].indexOf(this.argv._[0]) === -1) {
     return this.help()
@@ -83,7 +87,8 @@ Cli.prototype.run = function () {
       this.options['api-port'],
       this.options['proxy-ip'],
       this.options['dns-ip'],
-      this.options['dns-port']
+      this.options['dns-port'],
+      this.options['dns-ttl']
     )
 
     // check version

@@ -19,7 +19,7 @@ require('colors')
  *
  * @constructor
  */
-var App = function (ProxyDriver, HTTPDriver, DNSDriver, DockerDriver, domain, api_port, proxy_ip, dns_ip, dns_port) {
+var App = function (ProxyDriver, HTTPDriver, DNSDriver, DockerDriver, domain, api_port, proxy_ip, dns_ip, dns_port, dns_ttl) {
 
   this.dockerInfos = url.parse(process.env.DOCKER_HOST)
   this.proxyDriver = ProxyDriver
@@ -31,6 +31,7 @@ var App = function (ProxyDriver, HTTPDriver, DNSDriver, DockerDriver, domain, ap
   this.proxyIp = proxy_ip
   this.dnsIp = dns_ip
   this.dnsPort = dns_port
+  this.dnsTtl = dns_ttl
   this.version = require('./package.json').version
 
   // DNS stuff
