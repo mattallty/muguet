@@ -2,6 +2,7 @@
 
 # Muguet
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5ee111bae2c24b9f960e7fae987d6bf7)](https://www.codacy.com/app/matthiasetienne/muguet?utm_source=github.com&utm_medium=referral&utm_content=mattallty/muguet&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/mattallty/muguet.svg?branch=master)](https://travis-ci.org/mattallty/muguet) [![Coverage Status](https://coveralls.io/repos/mattallty/muguet/badge.svg?branch=master&service=github)](https://coveralls.io/github/mattallty/muguet?branch=master)
 
 > *Muguet* is a DNS Server & Reverse proxy for Docker environments. 
